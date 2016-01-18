@@ -1,0 +1,32 @@
+<pretty-config xmlns="http://ocpsoft.org/schema/rewrite-config-prettyfaces" 
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+  xsi:schemaLocation="http://ocpsoft.org/schema/rewrite-config-prettyfaces
+                      http://ocpsoft.org/xml/ns/prettyfaces/rewrite-config-prettyfaces.xsd">
+
+	<url-mapping id="root">
+		<pattern value="/" />
+		<view-id value="/home.jsf" />
+	</url-mapping>
+
+	<url-mapping id="home">
+		<pattern value="/home" />
+		<view-id value="/home.jsf" />
+	</url-mapping>
+
+	<url-mapping id="players">
+		<pattern value="/players" />
+		<view-id value="/players.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="teams">
+		<pattern value="/teams" />
+		<view-id value="/teams.jsf" />
+	</url-mapping>
+	
+	<url-mapping id="about">
+		<pattern value="/about" />
+		<view-id value="/about.jsf" />
+	</url-mapping>
+	
+
+</pretty-config>

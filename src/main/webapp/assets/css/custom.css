@@ -1,0 +1,60 @@
+html, body {
+	min-height: 100% !important;
+	height: 100% !important;
+}
+
+.actionButton {
+	width: 42px;
+	height: 42px;
+	padding: 0;
+	margin: 0;
+}
+
+.actionButton i {
+	font-size: 14px;
+	vertical-align: middle;
+}
+
+.actionColumn form {
+	display: inline;
+}
+
+.actionForm {
+	margin: 0 auto;
+}
+
+.center {
+	margin: 0 auto;
+}
+
+.editRow * {
+	display: inline;
+}
+
+.wrapper {
+	min-height: 85.27vh;
+}
+
+.footer {
+	border-top: 1px solid #eee;
+	//background-color: #E4E4E4;
+	padding-top: 30px;
+}
+
+.jumbotron {
+	
+	padding: 15% 0 15%;
+	text-align: center;	
+}
+
+.jumbotron .title {
+	//font-weight: 600;
+}
+
+.text-center th, td {
+	text-align: center;
+}
+
+.title {
+	margin-top: 30px;
+}

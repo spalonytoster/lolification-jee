@@ -1,0 +1,53 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:ui="http://java.sun.com/jsf/facelets">
+<h:head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="description" content="" />
+	<meta name="author" content="Maciej Posluszny" />
+	<!-- Mobile Specific Metas -->
+	<meta name="viewport" content="width=device-width, initial-scale=1" />
+	<title>
+		<ui:insert name="windowTitle">#{msg.mainWindowTitle}</ui:insert>
+	</title>
+	
+	<!-- FONTS -->
+	<link href="//fonts.googleapis.com/css?family=Raleway:400,300,600" rel="stylesheet" type="text/css" />
+	<link href='https://fonts.googleapis.com/css?family=Roboto:500' rel='stylesheet' type='text/css' />
+	
+	<!-- CSS -->
+	<link rel="stylesheet" href="#{request.contextPath}/assets/css/normalize.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/assets/css/skeleton.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/assets/css/navbar.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/assets/css/custom.css" />
+	<link rel="stylesheet" href="#{request.contextPath}/assets/css/font-awesome.css" />
+	
+	<!-- Favicon -->
+	<link rel="icon" type="image/png" href="#{request.contextPath}/assets/images/favicon.png" />
+</h:head>
+	
+<h:body>
+
+	<!-- NAVIGATION BAR -->
+	<ui:include src="/views/shared/navbar.xhtml" />
+	
+	
+	<!-- MAIN CONTENT -->
+	<ui:insert name="content" />	
+	
+	<!-- FOOTER -->
+	<div class="footer">
+		<div class="container">
+	        <div class="row">
+	            <div class="u-pull-right">
+	                <p>Maciej Posluszny 2015</p>
+	            </div>
+	        </div>
+	     </div>
+	</div>
+	
+	
+</h:body>
+</html>
