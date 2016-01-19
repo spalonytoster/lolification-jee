@@ -158,11 +158,11 @@ public class DAOTest {
 		assertEquals(team.getIdTeam(), team2.getIdTeam());
 		
 		Player player = playerDao.getPlayerByIgn("Jankos");
-		assertFalse(player.isRetired());
+		assertFalse(player.getRetired());
 		player.setRetired(true);
 		playerDao.updatePlayer(player);
 		Player player2 = playerDao.getPlayerByIgn("Jankos");
-		assertTrue(player2.isRetired());
+		assertTrue(player2.getRetired());
 	}
 	
 	@Test

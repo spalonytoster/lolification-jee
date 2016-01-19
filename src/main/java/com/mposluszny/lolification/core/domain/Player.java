@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
+import javax.persistence.Table;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 @Entity
+@Table(name="PLAYER")
 @NamedQueries({
 	@NamedQuery(name = "player.all", query = "SELECT p FROM Player p"),
 	@NamedQuery(name = "player.byIgn", query = "SELECT p FROM Player p WHERE p.ign = :ign")
@@ -35,10 +37,10 @@ public class Player {
 	
 	private String role;
 	
-	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
+	@ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER)
 	private Team team;
 	
-	private boolean isRetired;
+	private boolean retired;
 	
 	public long getIdPlayer() {
 		return idPlayer;
@@ -88,12 +90,12 @@ public class Player {
 		this.role = role;
 	}
 	
-	public boolean isRetired() {
-		return isRetired;
+	public boolean getRetired() {
+		return retired;
 	}
 	
-	public void setRetired(boolean isRetired) {
-		this.isRetired = isRetired;
+	public void setRetired(boolean retired) {
+		this.retired = retired;
 	}
 
 }

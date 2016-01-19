@@ -1,1 +1,1 @@
-<% response.sendRedirect("home.jsf"); %>
+<% response.sendRedirect("#{request.contextPath}/home"); %>
