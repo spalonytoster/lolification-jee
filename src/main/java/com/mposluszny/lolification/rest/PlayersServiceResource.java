@@ -5,6 +5,7 @@ import java.util.List;
 import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
@@ -22,5 +23,12 @@ public class PlayersServiceResource {
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public List<Player> getAllPlayers() {
 		return playerDao.getAllPlayers();
+	}
+	
+	@GET
+	@Path("/player/{idPlayer}")
+	@Produces(value=MediaType.APPLICATION_JSON)
+	public Player getPlayerById(@PathParam("idPlayer") long idPlayer) {
+		return playerDao.getPlayerById(idPlayer);
 	}
 }
