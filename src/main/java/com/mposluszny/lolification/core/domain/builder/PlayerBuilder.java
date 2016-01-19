@@ -42,7 +42,7 @@ public class PlayerBuilder {
 		return this;
 	}
 	
-	public PlayerBuilder team(Team team) {
+	public PlayerBuilder team(String team) {
 		player.setTeam(team);
 		return this;
 	}

@@ -1,6 +1,5 @@
 package com.mposluszny.lolification.core.dao.impl;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.ejb.Stateless;
@@ -9,7 +8,6 @@ import javax.persistence.PersistenceContext;
 
 import com.mposluszny.lolification.core.dao.PlayerDao;
 import com.mposluszny.lolification.core.domain.Player;
-import com.mposluszny.lolification.core.domain.Team;
 
 @Stateless
 public class PlayerDaoImpl implements PlayerDao {
@@ -56,28 +54,7 @@ public class PlayerDaoImpl implements PlayerDao {
 
 	@Override
 	public void deletePlayer(Player player) {
-		if (player.getTeam() != null) {
-			player.getTeam().getPlayers().remove(player);
-		}
 		getEntityManager().remove(player);
-	}
-
-	@Override
-	public void transferPlayer(long idPlayer, long idTeam) {		
-		Player player = (Player) getEntityManager()
-				.find(Player.class, idPlayer);
-		Team team = (Team) getEntityManager()
-				.find(Team.class, idTeam);
-		if (player.getTeam() != null) {
-			player.getTeam().getPlayers().remove(player);
-		}
-		if (team.getPlayers() == null) {
-			team.setPlayers(new ArrayList<Player>());
-		}
-		team.getPlayers().add(player);
-		player.setTeam(team);
-		getEntityManager().merge(player);
-		getEntityManager().merge(team);
 	}
 
 	@Override
