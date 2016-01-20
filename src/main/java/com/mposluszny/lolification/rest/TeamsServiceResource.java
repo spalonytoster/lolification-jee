@@ -19,7 +19,6 @@ public class TeamsServiceResource {
 	TeamDao teamDao;
 	
 	@GET
-	@Path(value="/")
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public List<Team> getAllTeams() {
 		List<Team> teams = teamDao.getAllTeams();
@@ -30,7 +29,7 @@ public class TeamsServiceResource {
 	}
 	
 	@GET
-	@Path("/team/{idTeam}")
+	@Path("/{idTeam}")
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public Team getTeamById(@PathParam("idTeam") long idTeam) {
 		Team team = teamDao.getTeamById(idTeam);

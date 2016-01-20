@@ -10,7 +10,7 @@
 		<div class="container wrapper title">
 			<div class="row">
 				<div class="one column">
-					<h2>Team</h2>
+					<h2>#{msg.team}</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -19,9 +19,9 @@
 						<table class="center table text-center">
 							<tbody>
 								<tr>
-									<th>Nazwa</th>
-									<th>Region</th>
-									<th>Data utworzenia</th>
+									<th>#{msg.teamName}</th>
+									<th>#{msg.region}</th>
+									<th>#{msg.dateOfEstablishment}</th>
 								</tr>
 								<tr>
 									<td>#{team.name}</td>
@@ -33,12 +33,12 @@
 						<table class="center table text-center" style="margin-top: 20px;">
 							<tbody>
 								<tr>
-									<th>Lp.</th>
-									<th>Imie</th>
-									<th>IGN</th>
-									<th>Nazwisko</th>
-									<th>Pozycja</th>
-									<th>Retired</th>
+									<th>#{msg.index}</th>
+									<th>#{msg.playerName}</th>
+									<th>#{msg.ign}</th>
+									<th>#{msg.surname}</th>
+									<th>#{msg.role}</th>
+									<th>#{msg.retired}</th>
 								</tr>
 								
 								<c:forEach var="player" items="#{team.players}" varStatus="row">
@@ -66,13 +66,13 @@
 							<input type="hidden" value="#{team.idTeam}" name="id" />
 							<div class="row">
 								<div class="one-third column">
-									<label for="nazwa">Nazwa</label>
+									<label for="nazwa">#{msg.teamName}</label>
 								</div>
 								<div class="one-third column">
-									<label for="region">Region</label>
+									<label for="region">#{msg.region}</label>
 								</div>
 								<div class="one-third column">
-									<label for="dataUtworzenia">Data utworzenia</label>
+									<label for="dataUtworzenia">#{msg.dateOfEstablishment}</label>
 								</div>
 							</div>
 							<div class="row">
@@ -93,13 +93,13 @@
 						<table class="center table text-center" style="margin-top: 20px;">
 							<tbody>
 								<tr>
-									<th>Lp.</th>
-									<th>Imie</th>
-									<th>IGN</th>
-									<th>Nazwisko</th>
-									<th>Pozycja</th>
-									<th>Retired</th>
-									<th>Remove</th>
+									<th>#{msg.index}</th>
+									<th>#{msg.playerName}</th>
+									<th>#{msg.ign}</th>
+									<th>#{msg.surname}</th>
+									<th>#{msg.role}</th>
+									<th>#{msg.retired}</th>
+									<th>#{msg.actionDelete}</th>
 								</tr>
 								
 								<c:forEach var="player" items="#{team.players}" varStatus="row">

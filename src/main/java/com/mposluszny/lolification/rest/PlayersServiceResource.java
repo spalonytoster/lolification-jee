@@ -19,14 +19,13 @@ public class PlayersServiceResource {
 	PlayerDao playerDao;
 	
 	@GET
-	@Path(value="/")
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public List<Player> getAllPlayers() {
 		return playerDao.getAllPlayers();
 	}
 	
 	@GET
-	@Path("/player/{idPlayer}")
+	@Path("/{idPlayer}")
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public Player getPlayerById(@PathParam("idPlayer") long idPlayer) {
 		return playerDao.getPlayerById(idPlayer);

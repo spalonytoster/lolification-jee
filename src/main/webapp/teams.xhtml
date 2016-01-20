@@ -12,7 +12,7 @@
 		<div class="container title">
 			<div class="row">
 				<div class="one column">
-					<h2>Teams</h2>
+					<h2>#{msg.teams}</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -21,13 +21,13 @@
 						<input type="hidden" value="true" name="add" />
 						<div class="row">
 							<div class="one-third column">
-								<label for="nazwa">Nazwa</label>
+								<label for="nazwa">#{msg.teamName}</label>
 							</div>
 							<div class="one-third column">
-								<label for="region">Region</label>
+								<label for="region">#{msg.region}</label>
 							</div>
 							<div class="one-third column">
-								<label for="dataUtworzenia">Data utworzenia</label>
+								<label for="dataUtworzenia">#{msg.dateOfEstablishment}</label>
 							</div>
 						</div>
 						<div class="row">
@@ -41,19 +41,20 @@
 								<input type="text" value="#{team.dateOfEstablishment}" id="dataUtworzenia" name="dateOfEstablishment" />
 							</div>
 						</div>
-						<input class="button-primary" type="submit" value="#{msg.actionAdd}" />
+						<!-- <input class="button-primary" type="submit" value="#{msg.actionAdd}" /> -->
+						<h:commandButton styleClass="button-primary" value="#{msg.actionAdd}" action="#{viewBean.add()}" />
 					</form>
 				
 					<table class="center table text-center">
 						<tbody>
 							<tr>
-								<th>Lp.</th>
-								<th>Nazwa</th>
-								<th>Region</th>
-								<th>Data utworzenia</th>
-								<th>Akcja</th>
+								<th>#{msg.index}</th>
+								<th>#{msg.teamName}</th>
+								<th>#{msg.region}</th>
+								<th>#{msg.dateOfEstablishment}</th>
+								<th>#{msg.action}</th>
 							</tr>
-							<ui:repeat var="team" value="#{viewBean.teams}" varStatus="row">
+							<ui:repeat var="team" value="#{viewBean.all}" varStatus="row">
 								<tr>
 									<td>#{row.index+1}</td>
 									<td>#{team.name}</td>

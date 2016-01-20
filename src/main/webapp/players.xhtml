@@ -12,7 +12,7 @@
 		<div class="container title">
 			<div class="row">
 				<div class="one column">
-					<h2>Players</h2>
+					<h2>#{msg.players}</h2>
 				</div>
 			</div>
 			<div class="row">
@@ -20,15 +20,15 @@
 					<table class="center table text-center">
 						<tbody>
 							<tr>
-								<th>Lp.</th>
-								<th>Imie</th>
-								<th>IGN</th>
-								<th>Nazwisko</th>
-								<th>Pozycja</th>
-								<th>Team</th>
-								<th>Retired</th>
+								<th>#{msg.index}</th>
+								<th>#{msg.playerName}</th>
+								<th>#{msg.ign}</th>
+								<th>#{msg.surname}</th>
+								<th>#{msg.role}</th>
+								<th>#{msg.team}</th>
+								<th>#{msg.retired}</th>
 							</tr>
-							<ui:repeat var="player" value="#{viewBean.players}" varStatus="row">
+							<ui:repeat var="player" value="#{viewBean.all}" varStatus="row">
 								<tr>
 									<td>#{row.index+1}</td>
 									<td>#{player.name}</td>
