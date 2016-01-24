@@ -35,8 +35,8 @@ public class Team {
 	@Size(min=2, max=5)
 	private String region;
 	
-	@Pattern(regexp="(0?[1-9]|[12][0-9]|3[01])/(0?[1-9]|1[012])/((19|20)\\d\\d)",
-			message="Wrong date format. Use dd-mm-yy.")
+	@Pattern(regexp="((?:19|20)\\d\\d)-(0?[1-9]|1[012])-([12][0-9]|3[01]|0?[1-9])",
+			message="Wrong date format. Use yy-mm-dd.")
 	private String dateOfEstablishment;
 	
 	@OneToMany(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)

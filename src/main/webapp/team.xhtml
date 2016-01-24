@@ -6,6 +6,8 @@
 	xmlns:c="http://java.sun.com/jsp/jstl/core"
 	template="/templates/default.xhtml">
 	<ui:define name="content">
+	
+	<c:set var="viewBean" value="#{teamsViewBean}" />
 		
 		<div class="container wrapper title">
 			<div class="row">
@@ -15,7 +17,7 @@
 			</div>
 			<div class="row">
 				<div class="twelve columns">
-					<c:if test="#{readonly}">
+					<ui:fragment rendered="#{viewBean.readonly}">
 						<table class="center table text-center">
 							<tbody>
 								<tr>
@@ -24,46 +26,15 @@
 									<th>#{msg.dateOfEstablishment}</th>
 								</tr>
 								<tr>
-									<td>#{team.name}</td>
-									<td>#{team.region}</td>
-									<td>#{team.dateOfEstablishment}</td>
+									<td>#{viewBean.team.name}</td>
+									<td>#{viewBean.team.region}</td>
+									<td>#{viewBean.team.dateOfEstablishment}</td>
 								</tr>
 							</tbody>
 						</table>
-						<table class="center table text-center" style="margin-top: 20px;">
-							<tbody>
-								<tr>
-									<th>#{msg.index}</th>
-									<th>#{msg.playerName}</th>
-									<th>#{msg.ign}</th>
-									<th>#{msg.surname}</th>
-									<th>#{msg.role}</th>
-									<th>#{msg.retired}</th>
-								</tr>
-								
-								<c:forEach var="player" items="#{team.players}" varStatus="row">
-									<tr>
-										<td>#{row.index+1}</td>
-										<td>#{player.name}</td>
-										<td>#{player.ign}</td>
-										<td>#{player.surname}</td>
-										<td>#{player.role}</td>
-										<td style="text-align: center;">
-											<c:if test="#{player.retired}">
-												<i class="fa fa-check"></i>
-											</c:if>
-											<c:if test="#{!player.retired}">
-												<i class="fa fa-close"></i>
-											</c:if>
-										</td>
-									</tr>
-								</c:forEach>
-							</tbody>
-						</table>
-					</c:if>
-					<c:if test="#{!readonly}">
-						<form class="editRow" method="post">
-							<input type="hidden" value="#{team.idTeam}" name="id" />
+					</ui:fragment>
+					<ui:fragment rendered="#{!viewBean.readonly}">
+						<h:form class="editRow" method="post">
 							<div class="row">
 								<div class="one-third column">
 									<label for="nazwa">#{msg.teamName}</label>
@@ -77,19 +48,21 @@
 							</div>
 							<div class="row">
 								<div class="one-third column">
-									<input type="text" value="#{team.name}" id="nazwa" name="name" />
+									<h:inputText type="text" value="#{viewBean.team.name}" />
 								</div>
 								<div class="one-third column">
-									<input type="text" value="#{team.region}" id="region" name="region" />
+									<h:inputText type="text" value="#{viewBean.team.region}" />
 								</div>
 								<div class="one-third column">
-									<input type="text" value="#{team.dateOfEstablishment}" id="dataUtworzenia" name="dateOfEstablishment" />
+									<h:inputText type="text" value="#{viewBean.team.dateOfEstablishment}" />
 								</div>
 							</div>
 	
-							<input class="button-primary" type="submit" value="Submit" />
-						</form>
-						
+							<h:commandButton styleClass="button-primary" value="#{msg.actionEdit}" action="#{viewBean.editTeam}" />
+						</h:form>
+					</ui:fragment>
+					
+					<h:panelGroup id="players">
 						<table class="center table text-center" style="margin-top: 20px;">
 							<tbody>
 								<tr>
@@ -99,10 +72,13 @@
 									<th>#{msg.surname}</th>
 									<th>#{msg.role}</th>
 									<th>#{msg.retired}</th>
-									<th>#{msg.actionDelete}</th>
+									<ui:fragment rendered="#{!viewBean.readonly}">
+										<th>#{msg.actionDelete}</th>
+									</ui:fragment>
+									
 								</tr>
 								
-								<c:forEach var="player" items="#{team.players}" varStatus="row">
+								<c:forEach var="player" items="#{viewBean.team.players}" varStatus="row">
 									<tr>
 										<td>#{row.index+1}</td>
 										<td>#{player.name}</td>
@@ -117,19 +93,21 @@
 												<i class="fa fa-close"></i>
 											</c:if>
 										</td>
-										<td>
-											<form class="actionForm" method="post">
-												<input type="hidden" value="#{team.idTeam}" name="returnTeamId" />
-												<button class="actionButton" type="submit" name="deleteFromTeam" value="#{player.idPlayer}" title="Remove this player from current team">
-													<i class="fa fa-close"></i>
-												</button>
-											</form>
+										<td class="actionColumn">
+											<ui:fragment rendered="#{!viewBean.readonly}">
+												<h:form>
+													<h:commandButton value="#{msg.actionFire}" title="#{msg.fireDecription}" action="#{viewBean.removePlayerFromTeam}">
+														<f:ajax render="players"/>
+														<f:param name="id" value="#{player.idPlayer}" />
+													</h:commandButton>
+												</h:form>
+											</ui:fragment>
 										</td>
 									</tr>
 								</c:forEach>
 							</tbody>
 						</table>
-					</c:if>			
+					</h:panelGroup>
 				</div>
 			</div>
 		</div>

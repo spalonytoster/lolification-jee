@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 
 import com.mposluszny.lolification.core.dao.PlayerDao;
 import com.mposluszny.lolification.core.domain.Player;
+import com.mposluszny.lolification.core.domain.Team;
 
 @Stateless
 public class PlayerDaoImpl implements PlayerDao {
@@ -55,6 +56,21 @@ public class PlayerDaoImpl implements PlayerDao {
 	@Override
 	public void deletePlayer(Player player) {
 		getEntityManager().remove(player);
+	}
+	
+	@Override
+	public void removeFromTeam(Player player) {
+		Team team = entityManager.find(Team.class, player.getTeam().getIdTeam());
+		boolean found = false;
+		for (int i = 0; i < team.getPlayers().size() && !found; i++) {
+			if (team.getPlayers().get(i).getIdPlayer() == player.getIdPlayer()) {
+				team.getPlayers().remove(i);
+				found = true;
+			}
+		}
+		player.setTeam(null);
+		entityManager.merge(team);
+		entityManager.merge(player);
 	}
 
 	@Override

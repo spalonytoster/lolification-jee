@@ -1,11 +1,10 @@
 package com.mposluszny.lolification.core.domain;
 
-import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -36,8 +35,8 @@ public class Player {
 	
 	private String role;
 	
-	@JoinColumn(referencedColumnName="name", table="team")
-	private String team;
+	@ManyToOne
+	private Team team;
 	
 	private boolean retired;
 	
@@ -73,11 +72,11 @@ public class Player {
 		this.ign = ign;
 	}
 	
-	public String getTeam() {
+	public Team getTeam() {
 		return team;
 	}
 
-	public void setTeam(String team) {
+	public void setTeam(Team team) {
 		this.team = team;
 	}
 	

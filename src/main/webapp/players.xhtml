@@ -28,14 +28,14 @@
 								<th>#{msg.team}</th>
 								<th>#{msg.retired}</th>
 							</tr>
-							<ui:repeat var="player" value="#{viewBean.all}" varStatus="row">
+							<ui:repeat var="player" value="#{viewBean.players}" varStatus="row">
 								<tr>
 									<td>#{row.index+1}</td>
 									<td>#{player.name}</td>
 									<td>#{player.ign}</td>
 									<td>#{player.surname}</td>
 									<td>#{player.role}</td>
-									<td>#{player.team}</td>
+									<td>#{player.team.name}</td>
 									<td style="text-align: center;">
 										<i class="#{player.retired ? 'fa fa-check' : 'fa fa-close'}"></i>
 									</td>

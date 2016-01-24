@@ -17,7 +17,7 @@
 			</div>
 			<div class="row">
 				<div class="twelve columns">
-					<form class="editRow" action="teams/team" method="post">
+					<h:form class="editRow" >
 						<input type="hidden" value="true" name="add" />
 						<div class="row">
 							<div class="one-third column">
@@ -32,53 +32,57 @@
 						</div>
 						<div class="row">
 							<div class="one-third column">
-								<input type="text" value="#{team.name}" id="nazwa" name="name" />
+								<h:inputText value="#{viewBean.name}" id="nazwa" />
 							</div>
 							<div class="one-third column">
-								<input type="text" value="#{team.region}" id="region" name="region" />
+								<h:inputText value="#{viewBean.region}" id="region" />
 							</div>
 							<div class="one-third column">
-								<input type="text" value="#{team.dateOfEstablishment}" id="dataUtworzenia" name="dateOfEstablishment" />
+								<h:inputText value="#{viewBean.dateOfEstablishment}" id="dataUtworzenia" />
 							</div>
 						</div>
-						<!-- <input class="button-primary" type="submit" value="#{msg.actionAdd}" /> -->
-						<h:commandButton styleClass="button-primary" value="#{msg.actionAdd}" action="#{viewBean.add()}" />
-					</form>
+						<h:commandButton styleClass="button-primary" value="#{msg.actionAdd}" actionListener="#{viewBean.createTeam()}" >
+							<f:ajax execute="@form" render="teams" />
+						</h:commandButton>
+					</h:form>
 				
-					<table class="center table text-center">
-						<tbody>
-							<tr>
-								<th>#{msg.index}</th>
-								<th>#{msg.teamName}</th>
-								<th>#{msg.region}</th>
-								<th>#{msg.dateOfEstablishment}</th>
-								<th>#{msg.action}</th>
-							</tr>
-							<ui:repeat var="team" value="#{viewBean.all}" varStatus="row">
+					<h:panelGroup id="teams">
+						<table class="center table text-center">
+							<tbody>
 								<tr>
-									<td>#{row.index+1}</td>
-									<td>#{team.name}</td>
-									<td>#{team.region}</td>
-									<td>#{team.dateOfEstablishment}</td>
-									<td class="actionColumn">
-										<form class="actionForm" action="teams/team" method="get">
-											<button class="actionButton" type="submit" name="view" value="${team.idTeam}">
-												<i class="fa fa-eye"></i>
-											</button>
-											<button class="actionButton" type="submit" name="edit" value="${team.idTeam}">
-												<i class="fa fa-edit"></i>
-											</button>
-										</form>
-										<form class="actionForm" action="team" method="post">
-											<button class="actionButton" type="submit" name="delete" value="${team.idTeam}">
-												<i class="fa fa-close"></i>
-											</button>
-										</form>
-									</td>
+									<th>#{msg.index}</th>
+									<th>#{msg.teamName}</th>
+									<th>#{msg.region}</th>
+									<th>#{msg.dateOfEstablishment}</th>
+									<th>#{msg.action}</th>
 								</tr>
-							</ui:repeat>
-						</tbody>
-					</table>
+								<ui:repeat var="team" value="#{viewBean.teams}" varStatus="row">
+									<tr>
+										<td>#{row.index+1}</td>
+										<td>#{team.name}</td>
+										<td>#{team.region}</td>
+										<td>#{team.dateOfEstablishment}</td>
+										<td class="actionColumn">
+											<c:set var="idTeam" value="#{team.idTeam}" />
+											<h:form>
+												<h:commandButton value="#{msg.actionView}" action="#{viewBean.goToTeam}" >
+													<f:param name="id" value="#{idTeam}" />
+													<f:param name="action" value="view" />
+												</h:commandButton>
+												<h:commandButton value="#{msg.actionEdit}" action="#{viewBean.goToTeam}" >
+													<f:param name="id" value="#{idTeam}" />
+													<f:param name="action" value="edit" />
+												</h:commandButton>
+												<h:commandButton value="#{msg.actionDelete}" actionListener="#{viewBean.deleteTeam(team)}" >
+													<f:ajax render="teams"/>
+												</h:commandButton>
+											</h:form>
+										</td>
+									</tr>
+								</ui:repeat>
+							</tbody>
+						</table>
+					</h:panelGroup>
 				</div>
 			</div>
 		</div>
