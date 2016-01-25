@@ -1,5 +1,6 @@
 package com.mposluszny.lolification.rest;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -11,6 +12,8 @@ import javax.ws.rs.core.MediaType;
 
 import com.mposluszny.lolification.core.dao.PlayerDao;
 import com.mposluszny.lolification.core.domain.Player;
+import com.mposluszny.lolification.rest.dto.PlayerDto;
+import com.mposluszny.lolification.rest.dto.builders.PlayerDtoBuilder;
 
 @Path(value="api/players")
 public class PlayersServiceResource {
@@ -20,14 +23,19 @@ public class PlayersServiceResource {
 	
 	@GET
 	@Produces(value=MediaType.APPLICATION_JSON)
-	public List<Player> getAllPlayers() {
-		return playerDao.getAllPlayers();
+	public List<PlayerDto> getAllPlayers() {
+		ArrayList<PlayerDto> players = new ArrayList<>();
+		for (Player player : playerDao.getAllPlayers()) {
+			players.add(new PlayerDtoBuilder(player)
+							.build());
+		}
+		return players;
 	}
 	
 	@GET
 	@Path("/{idPlayer}")
 	@Produces(value=MediaType.APPLICATION_JSON)
-	public Player getPlayerById(@PathParam("idPlayer") long idPlayer) {
-		return playerDao.getPlayerById(idPlayer);
+	public PlayerDto getPlayerById(@PathParam("idPlayer") long idPlayer) {
+		return new PlayerDtoBuilder(playerDao.getPlayerById(idPlayer)).build();
 	}
 }

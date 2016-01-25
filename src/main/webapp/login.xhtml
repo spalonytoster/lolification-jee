@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html"
+	template="/templates/default.xhtml">
+	<ui:define name="content">
+		<div class="container wrapper">
+			<h:form id="loginForm" action="/whatever" method="post">
+			  <div class="row">
+			    <div class="seven columns">
+			      <label for="email">Email Address</label>
+			      <h:inputText type="text" name="email" id="emailField" placeholder="name@example.com" required="true">
+			      </h:inputText>
+			      
+			      <label for="password">Password</label>
+			      <h:inputText type="password" name="password" id="passwordField" required="true">
+			      </h:inputText>
+			      
+			      <button type="submit" class="button-primary">Sign In</button>
+			    </div>
+			    <div class="five columns">
+			      <p>Something else</p>
+			    </div>
+			  </div>
+			</h:form>
+		</div>
+	</ui:define>
+</ui:composition>
+

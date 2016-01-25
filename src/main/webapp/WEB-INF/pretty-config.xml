@@ -6,6 +6,11 @@
 		<pattern value="/" />
 		<view-id value="/home.jsf" />
 	</url-mapping>
+	
+	<url-mapping id="login">
+		<pattern value="/login" />
+		<view-id value="/login.jsf" />
+	</url-mapping>
 
 	<url-mapping id="home">
 		<pattern value="/home" />
