@@ -57,7 +57,7 @@ public class TeamsViewBean implements Serializable {
 		team = teamDao.getTeamById(Long.parseLong(params.get("id")));
 		team.setPlayers(teamDao.getPlayersForTeam(team));
 		
-		return "team";
+		return "team" + "?faces-redirect=true";
 	}
 
 	public boolean isReadonly() {
@@ -90,7 +90,7 @@ public class TeamsViewBean implements Serializable {
 	public String editTeam() {
 		teamDao.updateTeam(team);
 		teams = teamDao.getAllTeams();
-		return "teams";
+		return "teams" + "?faces-redirect=true";
 	}
 
 	public Team getTeam() {
