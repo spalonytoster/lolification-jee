@@ -6,6 +6,10 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
+import org.apache.commons.lang3.ArrayUtils;
+import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
+
 import com.mposluszny.lolification.core.dao.PlayerDao;
 import com.mposluszny.lolification.core.domain.Player;
 import com.mposluszny.lolification.core.domain.Team;
@@ -44,12 +48,48 @@ public class PlayerDaoImpl implements PlayerDao {
 
 	@Override
 	public void updatePlayer(Player player) {
-		//getEntityManager().getCurrentSession().update(player);
+		Player beforeUpdate = getEntityManager().find(Player.class, player.getIdPlayer());
+		Team team = getEntityManager().find(Team.class, beforeUpdate.getTeam().getIdTeam());
+		Team destination = getEntityManager().find(Team.class, player.getTeam().getIdTeam());
+		boolean found = false;
+		
+		if (StringUtils.equals(player.getTeam().getName(), team.getName())) {
+			for (int i = 0; i < team.getPlayers().size() && !found; i++) {
+				if (team.getPlayers().get(i).getIdPlayer() == player.getIdPlayer()) {
+					team.getPlayers().remove(i);
+					team.getPlayers().add(player);
+					getEntityManager().merge(team);
+					found = true;
+				}
+			}
+		}
+		else {
+			for (int i = 0; i < team.getPlayers().size() && !found; i++) {
+				if (team.getPlayers().get(i).getIdPlayer() == player.getIdPlayer()) {
+					team.getPlayers().remove(i);
+					getEntityManager().merge(team);
+				}
+			}
+			player.setTeam(destination);
+			destination.getPlayers().add(player);
+			getEntityManager().merge(destination);
+		}
+
+		player.setTeam(destination);
 		getEntityManager().merge(player);
 	}
 
 	@Override
 	public void addPlayer(Player player) {
+		if (player.getTeam() != null &&
+				player.getTeam().getIdTeam() != 0L) {
+			Team team = getEntityManager().find(Team.class, player.getTeam().getIdTeam());
+			team.getPlayers().add(player);
+			player.setTeam(team);
+		}
+		else {
+			player.setTeam(null);
+		}
 		getEntityManager().persist(player);
 	}
 
