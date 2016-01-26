@@ -33,7 +33,7 @@ public class TeamsServiceResource {
 	}
 	
 	@GET
-	@Path("/{idTeam}")
+	@Path("/id/{idTeam}")
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public TeamDto getTeamById(@PathParam("idTeam") long idTeam) {
 		Team team = teamDao.getTeamById(idTeam);

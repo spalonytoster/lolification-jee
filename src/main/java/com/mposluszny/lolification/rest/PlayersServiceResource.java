@@ -33,9 +33,22 @@ public class PlayersServiceResource {
 	}
 	
 	@GET
-	@Path("/{idPlayer}")
+	@Path("/id/{idPlayer}")
 	@Produces(value=MediaType.APPLICATION_JSON)
 	public PlayerDto getPlayerById(@PathParam("idPlayer") long idPlayer) {
 		return new PlayerDtoBuilder(playerDao.getPlayerById(idPlayer)).build();
+	}
+	
+	@GET
+	@Path("/ign/{ign}")
+	@Produces(value=MediaType.APPLICATION_JSON)
+	public PlayerDto getPlayerByIgn(@PathParam("ign") String ign) {
+		if (Character.isLowerCase(ign.charAt(0))) {
+			StringBuilder sb = new StringBuilder(ign);
+			sb.replace(0, 1, String.valueOf(Character.toUpperCase(ign.charAt(0))));
+			ign =  sb.toString();
+		}
+		
+		return new PlayerDtoBuilder(playerDao.getPlayerByIgn(ign)).build();
 	}
 }
