@@ -23,7 +23,7 @@ public class TeamDtoBuilder {
 		if (team.getPlayers() != null) {
 			this.team.setPlayers(new ArrayList<String>());
 			for (Player player : team.getPlayers()) {
-				this.team.getPlayers().add(player.getName());
+				this.team.getPlayers().add(player.getIgn());
 			}
 		}
 		

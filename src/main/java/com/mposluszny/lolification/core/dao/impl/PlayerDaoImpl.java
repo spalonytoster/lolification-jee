@@ -6,9 +6,7 @@ import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 
-import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
-import org.apache.commons.lang3.math.NumberUtils;
 
 import com.mposluszny.lolification.core.dao.PlayerDao;
 import com.mposluszny.lolification.core.domain.Player;
@@ -95,6 +93,8 @@ public class PlayerDaoImpl implements PlayerDao {
 
 	@Override
 	public void deletePlayer(Player player) {
+		player = getEntityManager().find(Player.class, player.getIdPlayer());
+		removeFromTeam(player);
 		getEntityManager().remove(player);
 	}
 	
