@@ -178,4 +178,26 @@ public class PlayersServiceResource {
 		return Response.status(202).entity("Player '" + player.getIgn() + "' has been deleted successfully.")
 				.build();
 	}
+	
+	// Removes existing object in DB
+		@DELETE
+		@Path("/ign/{ign}")
+		public Response deleteTeam(@PathParam("ign") String ign) {
+			
+			Player player;
+			
+			try {
+				player = playerDao.getPlayerByIgn(ign);
+				playerDao.deletePlayer(player);
+			}
+			
+			catch (Exception e) {
+				e.printStackTrace();
+				return Response.status(500).entity("Something went wrong with the server. Sorry for inconvenience.")
+											.build();
+			}
+			
+			return Response.status(202).entity("Player '" + player.getIgn() + "' has been deleted successfully.")
+					.build();
+		}
 }

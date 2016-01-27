@@ -142,5 +142,27 @@ public class TeamsServiceResource {
 		return Response.status(202).entity("Team '" + team.getName() + "' has been deleted successfully.")
 				.build();
 	}
+	
+	// Removes existing object in DB
+		@DELETE
+		@Path("/name/{name}")
+		public Response deleteTeam(@PathParam("name") String name) {
+			
+			Team team;
+			
+			try {
+				team = teamDao.getTeamByName(name);
+				teamDao.deleteTeam(team);
+			}
+			
+			catch (Exception e) {
+				e.printStackTrace();
+				return Response.status(500).entity("Something went wrong with the server. Sorry for inconvenience.")
+											.build();
+			}
+			
+			return Response.status(202).entity("Team '" + team.getName() + "' has been deleted successfully.")
+					.build();
+		}
 
 }
