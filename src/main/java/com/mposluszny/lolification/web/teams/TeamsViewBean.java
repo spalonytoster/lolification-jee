@@ -38,9 +38,11 @@ public class TeamsViewBean implements Serializable {
 	private Team team;
 	private boolean readonly;
 
-	private String name;
-	private String region;
-	private String dateOfEstablishment;
+	private Team createdTeam;
+	
+	public TeamsViewBean() {
+		this.createdTeam = new Team();
+	}
 	
 	public String goToTeam() {
 		
@@ -82,9 +84,9 @@ public class TeamsViewBean implements Serializable {
 	public void createTeam() {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
 		teamDao.addTeam(new TeamBuilder()
-							.name(name)
-							.region(region)
-							.dateOfEstablishment(dateOfEstablishment)
+							.name(createdTeam.getName())
+							.region(createdTeam.getRegion())
+							.dateOfEstablishment(createdTeam.getDateOfEstablishment())
 							.build());
 		teams = teamDao.getAllTeams();
 	}
@@ -112,29 +114,13 @@ public class TeamsViewBean implements Serializable {
 		teamDao.deleteTeam(team);
 		teams = teamDao.getAllTeams();
 	}
-	
-	public String getName() {
-		return name;
+
+	public Team getCreatedTeam() {
+		return createdTeam;
 	}
 
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getRegion() {
-		return region;
-	}
-
-	public void setRegion(String region) {
-		this.region = region;
-	}
-
-	public String getDateOfEstablishment() {
-		return dateOfEstablishment;
-	}
-
-	public void setDateOfEstablishment(String dateOfEstablishment) {
-		this.dateOfEstablishment = dateOfEstablishment;
+	public void setCreatedTeam(Team createdTeam) {
+		this.createdTeam = createdTeam;
 	}
 
 }

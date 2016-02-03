@@ -32,7 +32,7 @@ public class Team {
 	private String name;
 	
 	@NotNull
-	@Size(min=2, max=5)
+	@Size(min=2, max=5, message="Must be between 2 and 5 letters.")
 	private String region;
 	
 	@Pattern(regexp="((?:19|20)\\d\\d)-(0?[1-9]|1[012])-([12][0-9]|3[01]|0?[1-9])",

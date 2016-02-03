@@ -9,11 +9,8 @@
 	<ui:define name="content">
 		
 		<c:set var="viewBean" value="#{teamsViewBean}"/>
-	
-		<div class="container title">
-		
-		<p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-		
+
+		<div class="container title">		
 			<div class="row">
 				<div class="one column">
 					<h2>#{msg.teams}</h2>
@@ -22,6 +19,7 @@
 			<div class="row">
 				<div class="twelve columns">
 					<h:form id="createTeamForm" class="editRow" >
+						<p:messages id="messages" showDetail="true" closable="true" />
 						<input type="hidden" value="true" name="add" />
 						<div class="row">
 							<div class="one-third column">
@@ -36,19 +34,22 @@
 						</div>
 						<div class="row">
 							<div class="one-third column">
-								<h:inputText value="#{viewBean.name}" id="nazwa" />
+								<p:inputText value="#{viewBean.createdTeam.name}" id="nazwa" />
 							</div>
 							<div class="one-third column">
-								<h:inputText value="#{viewBean.region}" id="region" />
+								<p:inputText value="#{viewBean.createdTeam.region}" id="region" />
 							</div>
 							<div class="one-third column">
-								<h:inputText value="#{viewBean.dateOfEstablishment}" id="dataUtworzenia" />
+								<p:inputText value="#{viewBean.createdTeam.dateOfEstablishment}" id="dataUtworzenia" />
 							</div>
 						</div>
-						<p:message for="createTeamForm" />
-						<h:commandButton styleClass="button-primary" value="#{msg.actionAdd}" actionListener="#{viewBean.createTeam()}" >
-							<f:ajax execute="@form" render="teams" />
-						</h:commandButton>
+						
+						<p:commandButton process="@form"
+										 partialSubmit="true"
+										 update="@form"
+										 styleClass="button-primary" 
+										 value="#{msg.actionAdd}" 
+										 actionListener="#{viewBean.createTeam()}" />
 					</h:form>
 				
 					<h:panelGroup id="teams">
