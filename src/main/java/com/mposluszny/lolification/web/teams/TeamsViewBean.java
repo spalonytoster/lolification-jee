@@ -82,7 +82,7 @@ public class TeamsViewBean implements Serializable {
 	}
 	
 	public void createTeam() {
-		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Error!", "Contact admin."));
+		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Info", "Operation successful!"));
 		teamDao.addTeam(new TeamBuilder()
 							.name(createdTeam.getName())
 							.region(createdTeam.getRegion())
